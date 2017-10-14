@@ -1,0 +1,35 @@
+{ /* neoebuild script */
+baseDir:"c:/neoe/oss/lab/"
+prjs:[
+
+ [neoehd_zim,"lab2/projects/neoehd-zim",{ dep:[neoeutils  neoehttpdintf neoeutils neoehttpdmapping neoehttpd zimreader] }]
+
+ [zimreader "C:/neoe/oss/openzim/zimreader-java"]
+ 
+ [neoehttpd,"lab2/projects/neoehttpd",{
+ 	cp:[ ],
+ 	dep:[neoeutils, neoehttpdintf, neoe_nodb_adaptor],
+ 	}],
+
+ [neoehttpdintf, "lab2/projects/neoehttpdintf", ]
+
+ [neoe_nodb_adaptor, "lab2/modules/nodb-adaptor" , {dep:[neoeutils,] }],
+
+
+ [neoedbop,"lab2/modules/neoedbop",],
+
+ [neoeutils, "lab2/modules/neoeutils"],
+
+
+ [neoehttpdmapping,"lab2/projects/neoehttpdmapping",{
+ 	cp:[ "lab2/libs/JSON-java.jar" ],
+ 	dep:[neoeutils, neoehttpdintf, neoe_nodb_adaptor neoedbop ],
+ 	}],
+
+
+],
+destDir:"lab2/projects/neoehd-zim/dist",
+target:8
+source:8
+}
+

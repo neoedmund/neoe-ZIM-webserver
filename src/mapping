@@ -1,0 +1,13 @@
+{
+mapping:[  [ "/"  "neoe.zim.ws.mapping.BaseServlet" ] ]
+TEMPLATE_PREFIX : "/dhtml/"
+SERVICE_PREFIX : "/do/"
+SITE_PREFIX: "/zim/"
+SERVICE_PACKAGE:"neoe.zim.ws.service."
+TEMPLATE_PACKAGE:"neoe.zim.ws.dhtml."
+VER: "9h30"
+ContextPath:"/zim"
+website:"zim-ws"
+loginPage:"/do/anon.Login"
+
+}

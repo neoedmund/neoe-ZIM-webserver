@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="dist/JSON-java.jar"/>
+	<classpathentry kind="lib" path="dist/neoe_nodb_adaptor.jar"/>
+	<classpathentry kind="lib" path="dist/neoedbop.jar"/>
+	<classpathentry kind="lib" path="dist/neoehd_zim.jar"/>
+	<classpathentry kind="lib" path="dist/neoehttpd.jar" sourcepath="/neoehttpd"/>
+	<classpathentry kind="lib" path="dist/neoehttpdintf.jar"/>
+	<classpathentry kind="lib" path="dist/neoehttpdmapping.jar"/>
+	<classpathentry kind="lib" path="dist/neoeutils.jar"/>
+	<classpathentry kind="lib" path="neoejloader.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/zimreader-java"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
