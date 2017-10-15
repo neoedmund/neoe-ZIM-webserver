@@ -1,6 +1,7 @@
 package neoe.zim.ws.mapping;
 
 import java.util.Map;
+import java.util.Random;
 
 import neoe.httpd.HttpConsts;
 import neoe.httpd.HttpdU;
@@ -61,12 +62,24 @@ public class BaseServlet implements IServlet {
 		Map zimmap = (Map) ZimsConf.get("zims");
 		String zimfn = (String) zimmap.get(zimName);
 		if (zimfn != null) {
-			try {
-				new ZimServ().serve(req, resp, zimfn, path);
-			} catch (Throwable e) {
-				e.printStackTrace();
-				resp.writeContent(e.toString());
+			final int retry = 15;
+			for (int i = 0; i < retry; i++) {
+				try {
+					new ZimServ().serve(req, resp, zimfn, path);
+					return;
+				} catch (OutOfMemoryError e) {
+					Thread.sleep(100 + rand.nextInt(300));
+					System.out.println("OOM but retry:" + i);
+					continue;
+				} catch (Throwable e) {
+					e.printStackTrace();
+					resp.writeContent(e.toString());
+					return;
+				}
 			}
+			resp.status(HttpConsts.HTTP_INTERNALERROR);
+			resp.writeContent("server too busy:" + path);
+			return;
 		} else {
 			// new StaticServ().serve(req, resp);
 			resp.status(HttpConsts.HTTP_NOTFOUND);
@@ -74,5 +87,7 @@ public class BaseServlet implements IServlet {
 			return;
 		}
 	}
+
+	Random rand = new Random();
 
 }

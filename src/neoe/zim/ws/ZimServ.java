@@ -34,14 +34,18 @@ public class ZimServ {
 							System.out.println("404b:" + url);
 						} else {
 							writeEntry(resp, zim, up);
+							zim.closeFile();
 							return;
 						}
 					}
 				}
 				resp.status(HttpConsts.HTTP_NOTFOUND);
 				resp.writeContent("url not found:" + url);
+				return;
 			} else {
 				writeEntry(resp, zim, up);
+				zim.closeFile();
+				return;
 			}
 
 		} else if (path.equals("random")) {
@@ -54,6 +58,7 @@ public class ZimServ {
 			path1 = path1.substring(0, path1.length() - path.length());
 			String path2 = path1 + "url/" + U.toStr(e.url);
 			resp.sendRedirectNoData(path2);
+			return;
 		}
 		if (path.startsWith("topic/")) {
 			String topic = path.substring("topic/".length());
@@ -66,6 +71,7 @@ public class ZimServ {
 					path1 = path1.substring(0, path1.length() - path.length());
 					String path2 = path1 + "url/" + U.toStr(e.url);
 					resp.sendRedirectNoData(path2);
+					return;
 				}
 			}
 		}
@@ -82,6 +88,9 @@ public class ZimServ {
 		if (e.type == 1) {
 			e = zim.getEntryByUrlIndex(e.redirectIndex);
 		}
+		// write anything only data is ready
+		byte[] bs = zim.getContent(ui);
+
 		long ts = new File(zim.fn).lastModified();
 		resp.setHeader("ETag", Long.toString(ts, 36));
 		resp.setHeader("Last-Modified", HttpdU.gmt(ts));
@@ -89,8 +98,11 @@ public class ZimServ {
 		if (mime != null) {
 			resp.setHeader(HttpConsts.HEAD_CONTENT_TYPE, mime);
 		}
-		byte[] bs = zim.getContent(ui);
+		// zim.printCacheSize();
+		// System.out.println(U.toStr(e.url));
+		// zim.writeContent(resp.getContentOutput(), ui);
 		resp.writeContent(bs);
+
 	}
 
 	static Random rand = new Random();

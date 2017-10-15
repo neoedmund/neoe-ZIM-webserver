@@ -40,6 +40,7 @@ public class search_html implements ITemplateData {
 			sb.append("no result for `" + k + "`");
 		}
 		m.put("c", sb.toString());
+		
 	}
 
 }
