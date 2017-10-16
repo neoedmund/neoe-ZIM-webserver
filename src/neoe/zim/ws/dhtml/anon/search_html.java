@@ -34,7 +34,7 @@ public class search_html implements ITemplateData {
 				break;
 			Entry e = zim.getEntryByTitleIndex(i);
 			sb.append(
-					String.format("<a href='/zim/%s/url/%s'>%s</a> <br/>", zimname, U.toStr(e.url), U.toStr(e.title)));
+					String.format("<a href='%s/%s/url/%s'>%s</a> <br/>", m.get("baseurl"), zimname, U.toStr(e.url), U.toStr(e.title)));
 		}
 		if (res.isEmpty()) {
 			sb.append("no result for `" + k + "`");

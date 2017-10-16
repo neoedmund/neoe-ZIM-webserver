@@ -88,6 +88,6 @@ public class BaseServlet implements IServlet {
 		}
 	}
 
-	Random rand = new Random();
+	static Random rand = new Random();
 
 }

@@ -1,6 +1,5 @@
 package neoe.zim.ws.dhtml.anon;
 
-import java.net.URLEncoder;
 import java.util.Map;
 
 import neoe.httpd.IHttpRequest;
@@ -12,10 +11,10 @@ public class welcome_html implements ITemplateData {
 
 	@Override
 	public void serve(IHttpRequest req, IHttpResponse resp, Map m) throws Exception {
-		m.put("c", getContent());
+		m.put("c", getContent(m));
 	}
 
-	private String getContent() throws Exception {
+	private String getContent(Map m) throws Exception {
 		StringBuilder sb = new StringBuilder();
 		Map zims = (Map) ZimsConf.get("zims");
 		sb.append("Hosted zims:<br/>");
@@ -23,8 +22,8 @@ public class welcome_html implements ITemplateData {
 			String zn = (String) key;
 			sb.append(String.format(
 					"<br/><i>%s</i><br/><input type=text class=search_input id='k_%s'><br/>&nbsp;&nbsp;<a href='javascript:search1(\"%s\")'>search</a><br/>"
-							+ "&nbsp;&nbsp;<a href='javascript:openUrl1(\"/zim/%s/random\")'>random</a><br/>",
-					zn, zn, zn, zn));
+							+ "&nbsp;&nbsp;<a href='javascript:openUrl1(\"%s/%s/random\")'>random</a><br/>",
+					zn, zn, zn, m.get("baseurl"),zn));
 		}
 		return sb.toString();
 	}
